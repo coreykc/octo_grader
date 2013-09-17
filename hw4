@@ -1,0 +1,26 @@
+FILES=$(ls | grep "^.*\.c$")
+echo $FILES
+
+for C_FILE in $FILES
+do
+  # Tell me which file
+  echo $C_FILE
+
+  # Build the output file name
+  OUT_NAME=$(echo $C_FILE | sed 's/\(^.*\)\(\.c\)/\1/')
+  OUT_NAME=$(echo "$OUT_NAME".out)
+
+  # Compile the code into the output name
+  cc $C_FILE -o $OUT_NAME
+
+  echo "Running #1"
+
+  # Run the file
+  ./$OUT_NAME 
+
+  echo "Done."
+ 
+ # delete compiled file
+  rm $OUT_NAME
+done
+
